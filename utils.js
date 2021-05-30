@@ -1,19 +1,19 @@
-const Twitter = require('twitter')
+const Twitter = require('twitter');
 
 const client = new Twitter({
   consumer_key: process.env.CONSUMER_KEY,
   consumer_secret: process.env.CONSUMER_SECRET,
   access_token_key: process.env.ACCESS_TOKEN_KEY,
   access_token_secret: process.env.ACCESS_TOKEN_SECRET
-})
+});
 
 // search tweets and page through results
 const searchTweets = function (params) {
   client.get('search/tweets', params, function (error, tweets, response) {
-    console.log(tweets.statuses)
+    console.log(tweets.statuses);
     if (error) {
-      console.log('error:', error)
-      return
+      console.log('error:', error);
+      return;
     }
     /*
     tweets.statuses.forEach(tweet => {
@@ -26,26 +26,26 @@ const searchTweets = function (params) {
         );
     });
     */
-    const nextResults = tweets.search_metadata.next_results
-    params.max_id = new URLSearchParams(nextResults).get('max_id')
+    const nextResults = tweets.search_metadata.next_results;
+    params.max_id = new URLSearchParams(nextResults).get('max_id');
     // console.log("params:", params);
     if (params.max_id !== null) {
-      searchTweets(params)
+      searchTweets(params);
     }
-  })
-}
+  });
+};
 
 // get followers
 const getUserFollowers = function (params) {
   client.get('followers/list', params, function (error, tweets, response) {
     if (error) {
-      console.log('error:', error)
-      return
+      console.log('error:', error);
+      return;
     }
-    const users = JSON.parse(response.body).users
-    const nextCursor = JSON.parse(response.body).nextCursor
+    const users = JSON.parse(response.body).users;
+    const nextCursor = JSON.parse(response.body).nextCursor;
     if (users) {
-      console.log(users)
+      console.log(users);
       users.forEach((user) => {
         // console.log('user', user)
 
@@ -60,81 +60,65 @@ const getUserFollowers = function (params) {
                     "\n"
                 );
             */
-      })
+      });
       if (nextCursor !== 0) {
-        params.cursor = nextCursor
-        getUserFollowers(params)
+        params.cursor = nextCursor;
+        getUserFollowers(params);
       }
     }
-  })
-}
+  });
+};
 
 // get last 7 days of my tweets
 const getMyTweets = function (params) {
   client.get('statuses/user_timeline', params, function (error, tweets, response) {
     if (!error) {
-      const out = tweets
-      console.log(out)
+      const out = tweets;
+      console.log(out);
     }
-  })
-}
+  });
+};
 
 // show tweet data
 const getTweetByID = function (tweetID) {
   client.get(`statuses/show/${tweetID}`, function (error, tweet, response) {
     if (!error) {
-      const out = tweet
-      console.log(out)
+      const out = tweet;
+      console.log(out);
     }
-  })
-}
+  });
+};
 
 // remove tweet by ID
 const destroy = function (id) {
   client.post(`statuses/destroy/${id}`, function (error, tweet, response) {
-    if (!error) { console.log('success deleting'); return }
-    console.log(error)
-  })
-}
+    if (!error) { console.log('success deleting'); return; }
+    console.log(error);
+  });
+};
 
 // let timeout = 10000;
 
 // post tweet
 const postMyTweet = function (tweet, halflife) {
   client.post('statuses/update', { status: `${tweet}` }, function (error, tweet, response) {
-    if (error) { console.log('Failed posting:', error); return }
-    console.log('success posting')
+    if (error) { console.log('Failed posting:', error); return; }
+    console.log('success posting');
     // console.log("response:", response);
     // if halflife"s defined, delete tweet in ${halflife} ms
     if (typeof halflife !== 'undefined') {
       setTimeout(function () {
-        destroy(`${tweet.id_str}`)
-      }, halflife)
+        destroy(`${tweet.id_str}`);
+      }, halflife);
     }
     // }
-  })
-}
-
-// find locations with trends
-const getTrendLocations = function (lat, lon) {
-  client.get('trends/closest', { lat: lat, long: lon }, function (error, locationsObj, response) {
-    const out = error || locationsObj
-    console.log(out)
-  })
-}
-
-// find trends in a location
-const getTrendsAtLocation = async (WOEID, exclude) => {
-  const trendsObj = await client.get('trends/place', { id: WOEID, exclude: exclude })
-  console.log(trendsObj[0].trends)
-}
+  });
+};
 
 module.exports = {
   searchTweets,
   getUserFollowers,
   getMyTweets,
   getTweetByID,
-  postMyTweet,
-  getTrendLocations,
-  getTrendsAtLocation
-}
+  postMyTweet
+};
