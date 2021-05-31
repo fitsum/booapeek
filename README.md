@@ -2,6 +2,6 @@
 - just learned about Twitter Fleets tho 🤷🏾
 
 ## TODO
-- test countdown messages
+- test intervaled countdown messages
 - option to add countdown message to reply vs main message
 - web UI

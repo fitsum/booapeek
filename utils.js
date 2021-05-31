@@ -108,7 +108,6 @@ const postMyTweet = function (tweet, halflife) {
         destroyMyTweet(`${tweet.id_str}`);
       }, halflife);
     }
-    // }
   });
 };
 
