@@ -89,14 +89,6 @@ const getTweetByID = function (tweetID) {
   });
 };
 
-// hide tweet by ID
-const hideMyTweet = function (id) {
-  client.put(`2/tweets/${id}/hidden`, function (error, tweet, response) {
-    if (!error) { console.log(`success hiding ID: ${id}`); return; }
-    console.log(error);
-  });
-};
-
 // remove tweet by ID
 const destroyMyTweet = function (id) {
   client.post(`statuses/destroy/${id}`, function (error, tweet, response) {
@@ -105,14 +97,11 @@ const destroyMyTweet = function (id) {
   });
 };
 
-// let timeout = 10000;
-
 // post tweet
 const postMyTweet = function (tweet, halflife) {
   client.post('statuses/update', { status: `${tweet}` }, function (error, tweet, response) {
     if (error) { console.log('Failed posting:', error); return; }
     console.log(`success posting ID: ${tweet.id_str}`);
-    // console.log("response:", response);
     // if halflife"s defined, delete tweet in ${halflife} ms
     if (typeof halflife !== 'undefined') {
       setTimeout(function () {
