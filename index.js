@@ -1,9 +1,9 @@
 require('dotenv').config();
-const t = require('./twests');
+const t = require('./utils');
 
 // settings
 // const p = { screen_name: 'orgX3' };
-const status = '13 is a spleen';
+const status = 'testing new function names and console messages';
 const timeout = 10000;
 // const searchParams = {
 //  q: 'RT @fitsum'
