@@ -90,25 +90,22 @@ const getTweetByID = function (tweetID) {
 };
 
 // remove tweet by ID
-const destroy = function (id) {
+const destroyMyTweet = function (id) {
   client.post(`statuses/destroy/${id}`, function (error, tweet, response) {
-    if (!error) { console.log('success deleting'); return; }
+    if (!error) { console.log(`success deleting ID: ${id}`); return; }
     console.log(error);
   });
 };
-
-// let timeout = 10000;
 
 // post tweet
 const postMyTweet = function (tweet, halflife) {
   client.post('statuses/update', { status: `${tweet}` }, function (error, tweet, response) {
     if (error) { console.log('Failed posting:', error); return; }
-    console.log('success posting');
-    // console.log("response:", response);
+    console.log(`success posting ID: ${tweet.id_str}`);
     // if halflife"s defined, delete tweet in ${halflife} ms
     if (typeof halflife !== 'undefined') {
       setTimeout(function () {
-        destroy(`${tweet.id_str}`);
+        destroyMyTweet(`${tweet.id_str}`);
       }, halflife);
     }
     // }
