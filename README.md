@@ -7,10 +7,12 @@
 - TODO UI
 
 ## TODO APP
-- dependabot alert for request module - https://github.com/fitsum/booapeek/security/dependabot/9
+- webspeech ui
+- jsdocs
 - 3 legged OAuth flow or modern equivalent
 - disappearing intervaled countdown reply to main message
 - version for twitter api 2.0
 
 ## TODO UI
-- fields: input, timeout before delete
+- webspeech
+  - controls for timeout and send
