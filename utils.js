@@ -1,3 +1,5 @@
+import { createRequire } from 'module'
+const require = createRequire( import.meta.url )
 const Twitter = require( 'twitter' )
 
 const client = new Twitter( {
@@ -111,7 +113,7 @@ const postMyTweet = function ( tweet, halflife ) {
   } )
 }
 
-module.exports = {
+export {
   searchTweets,
   getUserFollowers,
   getMyTweets,
