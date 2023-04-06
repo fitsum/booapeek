@@ -17,17 +17,6 @@ const searchTweets = function ( params ) {
       console.log( 'error:', error )
       return
     }
-    /*
-    tweets.statuses.forEach(tweet => {
-        let t = tweet;
-        //TODO: console.log(someObj) ??
-        console.log(
-            "Retweeted Status:", t.retweet_status,
-            "Entities:", t.entities,
-            "Metadata:", t.metadata
-        );
-    });
-    */
     const nextResults = tweets.search_metadata.next_results
     params.max_id = new URLSearchParams( nextResults ).get( 'max_id' )
     // console.log("params:", params);
@@ -49,19 +38,7 @@ const getUserFollowers = function ( params ) {
     if ( users ) {
       console.log( users )
       users.forEach( ( user ) => {
-        // console.log('user', user)
-
-        /*
-                console.log(
-                    "user:", user.screen_name,
-                    "| verified:", user.verified,
-                    "| followers:", user.followers_count,
-                    "| tweets:", user.statuses_count,
-                    "| lists:", user.listed_count,
-                    "| since:", user.created_at,
-                    "\n"
-                );
-            */
+      // do stuff
       } )
       if ( nextCursor !== 0 ) {
         params.cursor = nextCursor
