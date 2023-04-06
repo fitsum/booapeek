@@ -1,10 +1,9 @@
-require( 'dotenv' ).config()
-const t = require( './utils' )
+import 'dotenv/config'
+import {
+  postMyTweet
+} from './utils.js'
 
 const timeout = ( process.argv[ 3 ] || 30 ) * 1000
 const goneBy = new Date( new Date().getTime() + timeout ).toLocaleTimeString( 'en', { timeStyle: 'short' } ) + ' EST'
 const status = process.argv[ 2 ] + `\n👋 by ${ goneBy }`
-// t.searchTweets(searchParams)
-// t.getUserFollowers(p);
-// t.getMyTweets(p);
-t.postMyTweet( status, timeout )
+postMyTweet( status, timeout )
