@@ -9,6 +9,7 @@
 
 ## TODO APP
 - webspeech ui
+- option to output text on image instead of text
 - jsdocs
 - 3 legged OAuth flow or modern equivalent
 - disappearing intervaled countdown reply to main message
