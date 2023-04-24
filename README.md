@@ -16,9 +16,10 @@
 - version for twitter api 2.0
 
 ## TODO UI
-- webspeech
+- webspeech | text toggle
   - copy rec's front end
   - controls for timeout and send
 
 ## TODO API
+- consider websockets
 - copy from casual-map-toy or annotatious for latest/greatest
