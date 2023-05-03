@@ -1,4 +1,5 @@
 # Boo A Peek
+- **RETIRED** - Per notification from Twitter that API access is shut off for violating Rules and Policies
 - Delete tweets after _n_ microseconds
 - just learned about Twitter Fleets(RIP) tho 🤷🏾
 
